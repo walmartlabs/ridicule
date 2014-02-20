@@ -1,0 +1,25 @@
+{
+  "name": "ridicule",
+  "version": "0.0.1",
+  "main": "index",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "handlebars": "~2.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "lab": "0.1.x",
+    "hapi": "1.x.x"
+  },
+  "peerDependencies": {
+    "hapi": "1.x.x"
+  },
+  "keywords": [
+    "hapi",
+    "plugin"
+  ]
+}
