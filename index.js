@@ -1,6 +1,7 @@
 // Declare internals
 
-var path = require('path'),
+var Hapi = require('hapi'),
+    path = require('path'),
     fs = require('fs'),
     internals = {},
     prePangeaPathDir = '',
@@ -13,6 +14,8 @@ var path = require('path'),
 internals.defaults = {
   'apiPrefix': '/api',
   'mocksDir': __dirname + '/mocks',
+  'mocksAdmin': '/admin/mocks',
+  'mocksRoute': '/ridicule/',
   'enabled': false
 };
 
@@ -20,8 +23,6 @@ exports.register = function (plugin, options, next) {
 
   settings = plugin.hapi.utils.applyToDefaults(internals.defaults, options);
   settings.mocksDir = path.resolve(settings.mocksDir);
-
-  internals.plugin = plugin;
 
   for (var setting in settings) {
     settings[setting] = enforceSuffix(settings[setting], '/');
@@ -57,12 +58,20 @@ exports.register = function (plugin, options, next) {
 
   plugin.route({
     'method': '*',
-    'path': '/admin/mocks',
+    'path': settings.mocksAdmin,
     'handler': function(req, res) {
       if (req.payload) {
         settings.enabled = (req.payload.enabled === "true");
       }
       res.view('index', settings);
+    }
+  });
+
+  plugin.route({
+    'method': '*',
+    'path': settings.mocksRoute + '{mockFile*}',
+    'handler': function(req, res) {
+        res(new Hapi.response.File(settings.mocksDir + req.params.mockFile));
     }
   });
 
@@ -119,6 +128,7 @@ function resolveMock(mockPath) {
       // return value
       resolved = undefined;
     }
+
     return resolved;
   });
 
@@ -162,11 +172,8 @@ internals.onRequest = function (req, next) {
     }
     if (apiCheck.test(req.url.pathname)) {
       var mockFile = getMockLocation(req);
-      console.log(mockFile);
       if (mockFile) {
-        internals.plugin.log(['request'], 'Mocking: ' + req.url.pathname);
-        fs.createReadStream(mockFile).pipe(req.raw.res);
-        return;
+        req.setUrl(mockFile.replace(settings.mocksDir, settings.mocksRoute));
       }
     }
   }
