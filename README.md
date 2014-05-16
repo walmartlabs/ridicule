@@ -19,10 +19,6 @@ The following options are available for configuration.
   A relative URL that the admin page for this plugin can be found.  
   *Defaults to `/admin/mocks`*
 
-  `mocksAdminEnabled`  
-  Wether or not the admin page is reachable.  
-  *Defaults to `false`*
-
   `enabled`  
   Wether or not the mocks are enabled.  
   *Defaults to `false`*
@@ -35,7 +31,8 @@ At the start of the server, all configured routes are registered with a
 random 40 character prefix. (e.g. the route `/foo` is mocked out at `/(uuid)/foo`)
 
 When the mock server is enabled (set at runtime in the plugin configuration, or
-togglable at anytime at `mocksAdminPath`, if it is `mocksAdminEnabled`), all
+togglable at anytime at `mocksAdminPath`, if it the server has been hapi server 
+has beenstarted with with either the 'admin', or 'mocks' configuration label), all
 incoming requests are matched against the configured `apiPrefix`. When a match
 is found, the request is internally forwarded to the mock route handler.
 
