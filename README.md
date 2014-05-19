@@ -110,7 +110,7 @@ matches the value of the corresponding value in the querystring.
 
 For example, the following querystring
 
-`?service=Authentication&method=verify&version=1`
+`?category=Music&genre=ska&year=2012`
 
 would match the following validation
 
@@ -119,11 +119,11 @@ would match the following validation
   handler: function(request, reply) {
       ridicule.validate(requery.query, {
           validator: {
-              service: 'Authentication',
-              method: function(value) {
-                return value === 'verify' || value === 'logout'
+              category: 'Music',
+              genre: function(value) {
+                return value === 'ska' || value === 'rocksteady'
               },
-              version: /\d/
+              year: /^\d{4}$/
           },
           callback: function() {
               reply({'all': 'good'});
@@ -138,9 +138,9 @@ of course you can easily chain multiple checks
 ```javascript
       var queriesToCheck = [{
         validator: {
-            service: 'Authentication',
-            method:'verify',
-            version: /\d/
+            category: 'Music',
+            genre:'ska',
+            year: /^\d{4}$/
         },
         callback: function() {
             reply().file('./authMock.json');
@@ -185,9 +185,9 @@ An alternative to this is setting the validator object on your final query to
 ```javascript
       var queriesToCheck = [{
         validator: {
-            service: 'Authentication',
-            method:'verify',
-            version: /\d/
+            category: 'Music',
+            genre:'ska',
+            year: /^\d{4}$/
         },
         callback: function() {
             reply().file('./authMock.json');
