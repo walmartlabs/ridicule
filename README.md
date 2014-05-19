@@ -19,6 +19,10 @@ The following options are available for configuration.
   A relative URL that the admin page for this plugin can be found.  
   *Defaults to `/admin/mocks`*
 
+  `mocksAdminServerLabels`  
+   An array of labels used during hapi's plugin registration  
+  *Defaults to `['admin']`*
+
   `enabled`  
   Wether or not the mocks are enabled.  
   *Defaults to `false`*
@@ -174,11 +178,6 @@ the handlers `request` and `reply` interfaces.
           ridicule.bailout(request, reply);
       }
 ```
-
-This sets a magic cookie on the request, then redirects from the mocked route via
-a 302 back to the original unmocked route. ridicule checks for the existence of
-this cookie before remocking the request, and if found, doesn't touch it. As a
-result, the request will serve as normal (other than the redirects caused by ridicule).
 
 An alternative to this is setting the validator object on your final query to
 `true`. This will automatically match the supplied query, and can act as a catchall
