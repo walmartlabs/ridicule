@@ -34,11 +34,9 @@ hapi routes in it's `module.exports`.
 At the start of the server, all configured routes are registered with a
 random 40 character prefix. (e.g. the route `/foo` is mocked out at `/(uuid)/foo`)
 
-When the mock server is enabled (set at runtime in the plugin configuration, or
-togglable at anytime at `mocksAdminPath`, if it the server has been hapi server 
-has beenstarted with with either the 'admin', or 'mocks' configuration label), all
-incoming requests are matched against the configured `apiPrefix`. When a match
-is found, the request is internally forwarded to the mock route handler.
+When the mock server is [enabled](#enabling-your-mocks), all incoming requests are
+matched against the configured `apiPrefix`. When a match is found, the request is
+internally forwarded to the mock route handler.
 
 You have the ability to bailout on mocking out the request in a handler (useful for
 when you are mocking out only a subset of a querystring based system, since hapi
@@ -92,6 +90,29 @@ becomes
     }
 }
 ```
+
+## enabling your mocks
+
+There are three ways to enable/disable mocks.
+
+  1. **The hapi configuration setting**
+
+     You can change the `enabled` opton in your [setup](#setup) to `true`. This enables
+     it at start, but can changed in the future by..
+
+  2. **Toggling the admin page button**
+
+     You can turn mocks on or off at any time by visting the path [configured](#setup) under
+     `mocksAdminPath`. By default this is `/admin/mocks`. Note that this is
+     registered behind a hapi label (configurable in your setup, but `['admin']`
+     by default). This allows you to ship ridicule in your production site, and
+     have the toggle switch exist on a port that isn't publicly accessible.
+
+  3. **A cookie on the client**
+
+     If the cookie `always_ridicule=true` is set on the client, then the configured
+     mocks will always be served (until it is deleted, of course).
+
 
 ## querystrings
 
