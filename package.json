@@ -5,18 +5,12 @@
   "engines": {
     "node": "0.10.x"
   },
-  "scripts": {
-    "test": "make test"
-  },
   "dependencies": {
     "handlebars": "~2.0.0-alpha.1",
-    "boom": "2.X.X"
+    "hoek": "^2.3.0"
   },
   "devDependencies": {
     "lab": "0.1.x",
-    "hapi": "<=2.x.x"
-  },
-  "peerDependencies": {
     "hapi": "<=2.x.x"
   },
   "keywords": [
