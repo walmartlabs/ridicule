@@ -111,7 +111,9 @@ There are three ways to enable/disable mocks.
   3. **A cookie on the client**
 
      If the cookie `always_ridicule=true` is set on the client, then the configured
-     mocks will always be served (until it is deleted, of course).
+     mocks will always be served (until it is deleted, of course). Conversely,
+     `always_ridicule=false` will force the client to never be mocked out, regardless
+     of the server's current settings.
 
 
 ## querystrings
