@@ -7,12 +7,21 @@
   },
   "dependencies": {
     "cookie": "^0.1.2",
-    "handlebars": "~2.0.0-alpha.1",
+    "handlebars": "2.x.x",
     "hoek": "^2.3.0"
   },
   "keywords": [
     "hapi",
     "plugin",
     "mocks"
-  ]
+  ],
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "hapi": "^5.1.0",
+    "istanbul": "^0.2.13",
+    "mocha": "^1.20.1"
+  },
+  "scripts": {
+    "test": "make ist"
+  }
 }
