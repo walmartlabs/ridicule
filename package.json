@@ -6,12 +6,9 @@
     "node": "0.10.x"
   },
   "dependencies": {
+    "cookie": "^0.1.2",
     "handlebars": "~2.0.0-alpha.1",
     "hoek": "^2.3.0"
-  },
-  "devDependencies": {
-    "lab": "0.1.x",
-    "hapi": "<=2.x.x"
   },
   "keywords": [
     "hapi",
