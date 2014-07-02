@@ -81,15 +81,17 @@ becomes
 {
     "ridiculeSettings": {
         "statusCode": 418,
-        "headers": [
-            { "Content-Type": "x-stream" }
-        ]
+        "headers": {
+            "Content-Type": "x-stream"
+        }
     }
     payload: {
         "foo": "bar"
     }
 }
 ```
+
+The `payload` value does not follow the normal request flows and consequently only support string and JSON objects.
 
 ## enabling your mocks
 

@@ -8,7 +8,8 @@
   "dependencies": {
     "cookie": "^0.1.2",
     "handlebars": "2.x.x",
-    "hoek": "^2.3.0"
+    "hoek": "^2.3.0",
+    "underscore": "^1.6.0"
   },
   "keywords": [
     "hapi",
