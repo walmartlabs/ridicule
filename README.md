@@ -124,7 +124,7 @@ ridicule provides `ridicule.validate` method.
 
 ### validation
 
-`ridicule.validate` is a function that takes a query string, then a validation
+`ridicule.validate` is a function that takes a request+reply pair, then a validation
 object, consisting a `validator` object, and a `callback` function.
 
 The `validator` object is a plain object, where each key represents the key of
@@ -140,7 +140,7 @@ would match the following validation
 ```javascript
 ...
   handler: function(request, reply) {
-      ridicule.validate(requery.query, {
+      ridicule.validate(request, reply, {
           validator: {
               category: 'Music',
               genre: function(value) {
@@ -148,7 +148,7 @@ would match the following validation
               },
               year: /^\d{4}$/
           },
-          callback: function() {
+          callback: function(request, reply) {
               reply({'all': 'good'});
           }
       })
@@ -165,7 +165,7 @@ of course you can easily chain multiple checks
             genre:'ska',
             year: /^\d{4}$/
         },
-        callback: function() {
+        callback: function(request, reply) {
             reply().file('./authMock.json');
         }
       },{
@@ -173,13 +173,13 @@ of course you can easily chain multiple checks
             foo: 'bar',
             baz: 'biz'
         },
-        callback: function() {
+        callback: function(request, reply) {
             reply({'wordsAre': 'hard'});
         }
       }];
 
       queriesToCheck.some(function(route) {
-        return ridicule.validate(request.query, route);
+        return ridicule.validate(request, reply, route);
       });
 ```
 
@@ -194,7 +194,7 @@ the handlers `request` and `reply` interfaces.
 
 ```javascript
       var matched = queriesToCheck.some(function(route) {
-          return ridicule.validate(request.query, route);
+          return ridicule.validate(request, reply, route);
       });
 
       if (!matched) {
@@ -212,17 +212,17 @@ An alternative to this is setting the validator object on your final query to
             genre:'ska',
             year: /^\d{4}$/
         },
-        callback: function() {
+        callback: function(request, reply) {
             reply().file('./authMock.json');
         }
       },{
         validator: true,
-        callback: function() {
+        callback: function(request, reply) {
             reply().file('./catchall.json');
         }
       }];
 
       queriesToCheck.some(function(route) {
-        return ridicule.validate(request.query, route);
+        return ridicule.validate(request, reply, route);
       });
 ```
