@@ -81,9 +81,7 @@ becomes
 {
     "ridiculeSettings": {
         "statusCode": 418,
-        "headers": {
-            "Content-Type": "x-stream"
-        }
+        "headers": { "Content-Type": "x-stream" }
     }
     payload: {
         "foo": "bar"
@@ -91,7 +89,9 @@ becomes
 }
 ```
 
-The `payload` value does not follow the normal request flows and consequently only support string and JSON objects.
+Worth noting that since this is added at the very end of the hapi's request flow,
+As a result, since `payload` has to be inlined in the mock file, and is therefore
+limited to only support string and JSON objects, and not streams or buffers.
 
 ## enabling your mocks
 
@@ -126,7 +126,7 @@ ridicule provides `ridicule.validate` method.
 
 ### validation
 
-`ridicule.validate` is a function that takes a request+reply pair, then a validation
+`ridicule.validate` is a function that takes a request and reply pair, then a validation
 object, consisting a `validator` object, and a `callback` function.
 
 The `validator` object is a plain object, where each key represents the key of

@@ -9,7 +9,9 @@
     "cookie": "^0.1.2",
     "handlebars": "2.x.x",
     "hoek": "^2.3.0",
-    "underscore": "^1.6.0"
+    "lodash.defaults": "^2.4.1",
+    "lodash.foreach": "^2.4.1",
+    "lodash.isfunction": "^2.4.1"
   },
   "keywords": [
     "hapi",

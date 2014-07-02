@@ -5,6 +5,7 @@ module.exports = [
     method: 'GET',
     path: '/j/foo',
     handler: function(request, reply) {
+
       reply('This is mocked');
     }
   },
@@ -12,6 +13,7 @@ module.exports = [
     method: 'GET',
     path: '/j/complex',
     handler: function(request, reply) {
+
       if (request.query.json) {
         reply({
           ridiculeSettings: {},
@@ -36,6 +38,7 @@ module.exports = [
     method: 'GET',
     path: '/j/bail',
     handler: function(request, reply) {
+
       Ridicule.bailout(request, reply);
     }
   },
@@ -43,6 +46,7 @@ module.exports = [
     method: 'GET',
     path: '/j/missing-bail',
     handler: function(request, reply) {
+
       Ridicule.bailout(request, reply);
     }
   }
