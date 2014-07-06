@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ridicule cookie setter</title>
+  </head>
+
+  <body>
+    <script>
+      function setCookie(setCookie) {
+        var value = "{{forceCookieValue}}";
+        var date = new Date();
+        var now = date.getTime();
+        var expireTime = setCookie ? now + (1000 * 60 * 30) : now;
+        var expires;
+
+        date.setTime(expireTime);
+
+        expires = "; expires=" + date.toGMTString();
+
+        document.cookie='always_ridicule=' + value + expires;
+      }
+    </script>
+    <button onclick="setCookie(true)">
+      add force-mock cookie
+    </button>
+    <button onclick="setCookie(false)">
+      remove force-mock cookie
+    </button>
+  </body>
+</html>

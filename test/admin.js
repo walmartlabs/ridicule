@@ -1,7 +1,7 @@
 var Config = require('../lib/config'),
     expect = require('chai').expect,
     hapi = require('hapi'),
-    Plugin = require('../lib/admin');
+    Plugin = require('../lib');
 
 describe('admin endpoints', function() {
 
@@ -17,15 +17,17 @@ describe('admin endpoints', function() {
           version: '1.0.0',
           register: function(plugin, options, next) {
 
-            Config.init(options);
-            Plugin.init(plugin);
+            var noopNext = function(){};
+
+            Plugin.register(plugin, options, noopNext);
             next();
           }
         },
         {
           enabled: false,
           mocksAdminServerLabels: 'admin',
-          mocksAdminPath: '/mocks'
+          mocksAdminPath: '/mocks',
+          mocksDir: 'test/mocks'
         },
         function() {
 
@@ -46,6 +48,7 @@ describe('admin endpoints', function() {
         done();
       });
     });
+
     it('should return disabled view', function(done) {
 
       Config.set('enabled', false);
@@ -71,6 +74,7 @@ describe('admin endpoints', function() {
         done();
       });
     });
+
     it('should disable mocking', function(done) {
 
       Config.set('enabled', false);

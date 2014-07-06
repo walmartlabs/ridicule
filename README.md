@@ -27,6 +27,25 @@ The following options are available for configuration.
   Wether or not the mocks are enabled.  
   *Defaults to `false`*
 
+  `enableForceCookiePage`  
+  A boolean representing wether or not to register the cookie setter page.
+  This page gives a simple button to turn on or off the `always_ridicule` cookie,
+  which allows for a client to opt-in to forcing mock responses, regardless of
+  server settings.
+  Useful for novice testers or devices where bookmarklet creaton is cumbersome.
+  *Defaults to `false`*
+
+  `forceCookiePath`  
+  A relative URL that the cookie setter page can be found at.  
+  *Defaults to `/cookie`*
+
+  `forceCookieValue`  
+  A string representing the value of the `always_ridicule` cookie. Allows for servers
+  to have a publically available opt-in mocking method without having the specific
+  necessary cookie publically known. `expires` value is 30 minutes from the time
+  it is set.  
+  *Defaults to `"true"`*
+
 ## how it works
 Inside of your `mocksDir`, create a `ridicule.js` file that exposes an array
 hapi routes in it's `module.exports`.
@@ -112,11 +131,11 @@ There are three ways to enable/disable mocks.
 
   3. **A cookie on the client**
 
-     If the cookie `always_ridicule=true` is set on the client, then the configured
-     mocks will always be served (until it is deleted, of course). Conversely,
-     `always_ridicule=false` will force the client to never be mocked out, regardless
-     of the server's current settings.
-
+     If the cookie `always_ridicule` is set with the value from the configured
+     `forceCookieValue` (default value is the string "true", e.g. `always_ridicule="true"`)
+     on the client, then the configured mocks will always be served (until it is
+     deleted, of course). In, addition, `always_ridicule=false` will force the
+     client to never be mocked out, regardless of the server's current settings.  
 
 ## querystrings
 
