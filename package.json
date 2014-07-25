@@ -7,11 +7,13 @@
   },
   "dependencies": {
     "cookie": "^0.1.2",
+    "escape-regexp": "0.0.1",
     "handlebars": "2.x.x",
-    "hoek": "^2.3.0",
+    "joi": "^4.6.1",
     "lodash.defaults": "^2.4.1",
     "lodash.foreach": "^2.4.1",
-    "lodash.isfunction": "^2.4.1"
+    "lodash.isfunction": "^2.4.1",
+    "supports-color": "^0.2.0"
   },
   "keywords": [
     "hapi",
