@@ -50,6 +50,24 @@ The following options are available for configuration.
 Inside of your `mocksDir`, create a `ridicule.js` file that exposes an array
 hapi routes in it's `module.exports`.
 
+```javascript
+module.exports = [{
+    method: 'GET',
+    path: '/hello',
+    handler: function(request, reply) {
+
+        reply('hello world');
+    }
+},{
+    method: 'POST',
+    path: '/goodbye',
+    handler: function(request, reply) {
+
+        reply('thanks for all the fish');
+    }
+}]
+```
+
 At the start of the server, all configured routes are registered with a
 random 40 character prefix. (e.g. the route `/foo` is mocked out at `/(uuid)/foo`)
 
